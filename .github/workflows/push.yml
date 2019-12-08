@@ -1,9 +1,10 @@
 name: openapi-generator-cli
 
-on:
-  push:
-    paths-ignore:
-      - "openapi-generator-cli.jar"
+on: pull_request
+# on:
+#   push:
+#     branches:
+#       - master
 
 env:
   DOCKER_BUILDKIT: 1
@@ -25,7 +26,10 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Build OpenAPIGenerator
         run: ./mvnw clean package -DskipTests=true
-      - name: Git push
+      - name: Publish OpenAPIGenerator
+        uses: eskatos/gradle-command-action@v1
         env:
+          USERNAME: u-nation
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./.github/actions/entrypoint.sh
+        with:
+          arguments: publish
