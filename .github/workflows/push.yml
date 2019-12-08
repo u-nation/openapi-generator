@@ -32,4 +32,4 @@ jobs:
           USERNAME: u-nation
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          arguments: publish
+          arguments: publish --info
