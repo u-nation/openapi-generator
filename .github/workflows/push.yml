@@ -2,8 +2,8 @@ name: openapi-generator-cli
 
 on:
   push:
-    paths-ignore:
-      - "openapi-generator-cli.jar"
+    branches:
+      - master
 
 env:
   DOCKER_BUILDKIT: 1
@@ -23,9 +23,8 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Build OpenAPIGenerator
-        run: ./mvnw clean package -DskipTests=true
-      - name: Git push
+      - name: Publish OpenAPIGenerator
         env:
+          USERNAME: u-nation
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./.github/actions/entrypoint.sh
+        run: ./mvnw -s ./settings.xml clean deploy
