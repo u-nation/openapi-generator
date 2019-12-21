@@ -11,7 +11,7 @@ if [ "$GIT_BRANCH" = "" ] ; then
   export GIT_BRANCH=${GIT_BRANCH#remotes/origin/};
 fi
 
-git remote set-url origin https://team-lab:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+git remote set-url origin https://u-nation:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
 git checkout $GIT_BRANCH
 
 # replace old jar
